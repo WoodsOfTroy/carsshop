@@ -22,7 +22,6 @@ $.each(cars, function(index, value){
 $("#color option").val(function(idx, val) {
     $(this).siblings('[value="'+ val +'"]').remove();
   });
-console.dir($("#color option"));
 // Функция вывода полного списка автомобилей
 $(document).ready(function(){
     $.each(cars, function(index, value){
