@@ -14,8 +14,8 @@ let cars = [{brand: 'BMW', price:70000, color:'black', model:'m5'},
         {brand: 'Skoda', price:15000, color:'blue', model:'Fabia'}];
 
 // Функция заполнения селект-списка
-$.each(cars, function(index, value){ 
-    $('#color').first().append(`<option value="" selected>--Выберите цвет--</option>`).append(`<option value="${value.color}">${value.color}</option>`);
+$.each(cars, function(index, car){ 
+    $('#color').first().append(`<option value="" disabled>--Выберите цвет--</option>`).append(`<option value="${car.color}">${car.color}</option>`);
     // .first().append(`<option value="" selected>--Выберите цвет--</option>`)
 });
 // Функция удаления дубликатов из списка цветов
@@ -24,8 +24,8 @@ $("#color option").val(function(idx, val) {
   });
 // Функция вывода полного списка автомобилей
 $(document).ready(function(){
-    $.each(cars, function(index, value){
-        $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${value.brand} ${value.model}</h1><span>Color: ${value.color}</span><h2>${value.price}</h2></div></div>`);
+    $.each(cars, function(index, car){
+        $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${car.brand} ${car.model}</h1><span>Color: ${car.color}</span><h2>${car.price}</h2></div></div>`);
     });
 });
 function checkPrice(arr)
@@ -100,62 +100,71 @@ function checkColor (arr)
 // Выполнения по нажатию кнопки
 $('button').click(function(){
     let sortedCars = [];
+    console.log("Hello");
+
     $('.cars').empty();
-    if($('#price').val() != '')
-    {
-        sortedCars = checkPrice(cars);
-        if($('#brand').val() != '')
-        {
-            sortedCars = checkBrand(sortedCars);
-        } else if ($('#model').val() != '')
-        {
-            sortedCars = checkModel(sortedCars);
-        } else if ($('#color option').is(':selected'))
-        {
-            sortedCars = checkColor(sortedCars);
-        }
-    } else if($('#brand').val() != '')
-    {
-        sortedCars = checkBrand(cars);
+    // $.each(cars, function(index, car){
         if($('#price').val() != '')
         {
-            sortedCars = checkPrice(sortedCars);
-        } else if ($('#model').val() != '')
+            sortedCars = checkPrice(cars);
+            debugger;
+            if($('#brand').val() != '')
+            {
+                sortedCars = checkBrand(sortedCars);
+            } else if ($('#model').val() != '')
+            {
+                sortedCars = checkModel(sortedCars);
+            } 
+            else if ($('#color option').is(':selected'))
+            {
+                sortedCars = checkColor(sortedCars);
+            }
+        } else if($('#brand').val() != '')
         {
-            sortedCars = checkModel(sortedCars);
-        } else if ($('#color option').is(':selected'))
+            sortedCars = checkBrand(cars);
+            if($('#price').val() != '')
+            {
+                sortedCars = checkPrice(sortedCars);
+            } else if ($('#model').val() != '')
+            {
+                sortedCars = checkModel(sortedCars);
+            } 
+            else if ($('#color option').is(':selected'))
+            {
+                sortedCars = checkColor(sortedCars);
+            }
+        } else if($('#model').val() != '')
         {
-            sortedCars = checkColor(sortedCars);
+            sortedCars = checkModel(cars);
+            if($('#price').val() != '')
+            {
+                sortedCars = checkPrice(sortedCars);
+            } else if ($('#brand').val() != '')
+            {
+                sortedCars = checkBrand(sortedCars);
+            } 
+            else if ($('#color option').is(':selected'))
+            {
+                sortedCars = checkColor(sortedCars);
+            }
+        } 
+        else if($('#color option').is(':selected'))
+        {
+            sortedCars = checkColor(cars);
+            if($('#price').val() != '')
+            {
+                sortedCars = checkPrice(sortedCars);
+            } else if ($('#brand').val() != '')
+            {
+                sortedCars = checkBrand(sortedCars);
+            } else if ($('#model').val() != '')
+            {
+                sortedCars = checkModel(sortedCars);
+            }
         }
-    } else if($('#model').val() != '')
+    // });    
+    $.each(sortedCars, function(index, car)
     {
-        sortedCars = checkModel(cars);
-        if($('#price').val() != '')
-        {
-            sortedCars = checkPrice(sortedCars);
-        } else if ($('#brand').val() != '')
-        {
-            sortedCars = checkBrand(sortedCars);
-        } else if ($('#color option').is(':selected'))
-        {
-            sortedCars = checkColor(sortedCars);
-        }
-    } else if($('#color option').is(':selected'))
-    {
-        sortedCars = checkColor(cars);
-        if($('#price').val() != '')
-        {
-            sortedCars = checkPrice(sortedCars);
-        } else if ($('#brand').val() != '')
-        {
-            sortedCars = checkBrand(sortedCars);
-        } else if ($('#model').val() != '')
-        {
-            sortedCars = checkModel(sortedCars);
-        }
-    }
-    $.each(sortedCars, function(index, value)
-    {
-        $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${value.brand} ${value.model}</h1><span>Color: ${value.color}</span><h2>${value.price}</h2></div></div>`);
+        $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${car.brand} ${car.model}</h1><span>Color: ${car.color}</span><h2>${car.price}</h2></div></div>`);
     });  
 })
