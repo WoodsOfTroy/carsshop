@@ -13,21 +13,20 @@ let cars = [{brand: 'BMW', price:70000, color:'black', model:'m5'},
         {brand: 'Skoda', price:20000, color:'white', model:'Octavia'},
         {brand: 'Skoda', price:15000, color:'blue', model:'Fabia'}];
 
-// Функция заполнения селект-списка
-$.each(cars, function(index, car){ 
+$.each(cars, function(index, car){   // Функция заполнения селект-списка
     $('#color').first().append(`<option value="" selected>--Выберите цвет--</option>`).append(`<option value="${car.color}">${car.color}</option>`);
 });
 // Функция удаления дубликатов из списка цветов
 $("#color option").val(function(idx, val) {
     $(this).siblings('[value="'+ val +'"]').remove();
   });
-// Функция вывода полного списка автомобилей
-$(document).ready(function(){
+$(document).ready(function(){               // Функция вывода полного списка автомобилей
     $.each(cars, function(index, car){
         $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${car.brand} ${car.model}</h1><span>Color: ${car.color}</span><h2>${car.price}</h2></div></div>`);
     });
 });
-function checkPrice(arr)
+
+function checkPrice(arr)       //Функция проверки введенной цены 
 {
     let sortedCars = [];
     $.each(arr, function(index, car){
@@ -56,7 +55,7 @@ function checkPrice(arr)
 });
     return sortedCars;
 }
-function checkBrand (arr)
+function checkBrand (arr)     //Функция проверки введенного производителя авто
 {
     let sortedCars = [];
     $.each(arr, function(index, car){
@@ -71,7 +70,7 @@ function checkBrand (arr)
     });
     return sortedCars;
 }
-function checkModel (arr)
+function checkModel (arr)       //Функция проверки модели авто
 {
     let sortedCars = [];
     $.each(arr, function(index, car){
@@ -85,7 +84,7 @@ function checkModel (arr)
     });
     return sortedCars;
 }
-function checkColor (arr)
+function checkColor (arr)      //Функция проверки введенного цвета
 {
     let sortedCars = [];
     $.each(arr, function(index, car){
@@ -96,8 +95,7 @@ function checkColor (arr)
     });
     return sortedCars;
 }
-// Выполнения по нажатию кнопки
-$('button').click(function(){
+$('button').click(function(){            // Выполнения по нажатию кнопки
     let sortedCars = [];
     $('.cars').empty();
     // $.each(cars, function(index, car){
@@ -157,10 +155,8 @@ $('button').click(function(){
             {
                 sortedCars = checkModel(sortedCars);
             }
-            // carList(sortedCars); 
         }
-    // });
-    $.each(sortedCars, function(index, car)
+    $.each(sortedCars, function(index, car)     //Выведение отсортированного массива на экран
     {
         $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${car.brand} ${car.model}</h1><span>Color: ${car.color}</span><h2>${car.price}</h2></div></div>`);
     });
