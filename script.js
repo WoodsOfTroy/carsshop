@@ -15,8 +15,7 @@ let cars = [{brand: 'BMW', price:70000, color:'black', model:'m5'},
 
 // Функция заполнения селект-списка
 $.each(cars, function(index, car){ 
-    $('#color').first().append(`<option value="" disabled>--Выберите цвет--</option>`).append(`<option value="${car.color}">${car.color}</option>`);
-    // .first().append(`<option value="" selected>--Выберите цвет--</option>`)
+    $('#color').first().append(`<option value="" selected>--Выберите цвет--</option>`).append(`<option value="${car.color}">${car.color}</option>`);
 });
 // Функция удаления дубликатов из списка цветов
 $("#color option").val(function(idx, val) {
@@ -90,35 +89,32 @@ function checkColor (arr)
 {
     let sortedCars = [];
     $.each(arr, function(index, car){
-        if ($('#color option:selected').text() === car.color)
+        if ($('#color option:selected').text() === car.color || $('#color option').first().is(':selected'))
         {
             sortedCars.push(car);
-        }        
+        }    
     });
     return sortedCars;
 }
 // Выполнения по нажатию кнопки
 $('button').click(function(){
     let sortedCars = [];
-    console.log("Hello");
-
     $('.cars').empty();
     // $.each(cars, function(index, car){
         if($('#price').val() != '')
         {
             sortedCars = checkPrice(cars);
-            debugger;
             if($('#brand').val() != '')
             {
                 sortedCars = checkBrand(sortedCars);
             } else if ($('#model').val() != '')
             {
                 sortedCars = checkModel(sortedCars);
-            } 
-            else if ($('#color option').is(':selected'))
+            } else if ($('#color option').is(':selected'))
             {
                 sortedCars = checkColor(sortedCars);
             }
+            // carList(sortedCars); 
         } else if($('#brand').val() != '')
         {
             sortedCars = checkBrand(cars);
@@ -128,11 +124,11 @@ $('button').click(function(){
             } else if ($('#model').val() != '')
             {
                 sortedCars = checkModel(sortedCars);
-            } 
-            else if ($('#color option').is(':selected'))
+            } else if ($('#color option').is(':selected'))
             {
                 sortedCars = checkColor(sortedCars);
             }
+            // carList(sortedCars);  
         } else if($('#model').val() != '')
         {
             sortedCars = checkModel(cars);
@@ -147,8 +143,8 @@ $('button').click(function(){
             {
                 sortedCars = checkColor(sortedCars);
             }
-        } 
-        else if($('#color option').is(':selected'))
+            // carList(sortedCars);  
+        } else if($('#color option').is(':selected'))
         {
             sortedCars = checkColor(cars);
             if($('#price').val() != '')
@@ -161,10 +157,13 @@ $('button').click(function(){
             {
                 sortedCars = checkModel(sortedCars);
             }
+            // carList(sortedCars); 
         }
-    // });    
+    // });
     $.each(sortedCars, function(index, car)
     {
         $('.cars').append(`<div class="car"><div class="photo">photo</div><div class="specification"><h1>${car.brand} ${car.model}</h1><span>Color: ${car.color}</span><h2>${car.price}</h2></div></div>`);
-    });  
+    });
+      
+    
 })
