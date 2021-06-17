@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Shop</title>
+    
+    <style>
+        *
+        {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        header
+        {
+            background-color: #3e4a5c;
+            color: #fafcff;
+            font-size: 26pt;
+            padding: 30px;
+            z-index: 1;
+        }
+        .wrapper
+        {
+            display: flex;
+        }
+        aside
+        {
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            width: 140px;
+            height: 100%;
+            padding: 15px;
+            background-color: #f7f1a6;
+            z-index: 2;
+        }
+        input[type="text"]
+        {
+            padding: 3px;
+        }
+        button
+        {
+            margin-top: 30px;
+            font-size: 20pt;
+            color:white;
+            background-color: tomato;
+        }
+        .radio-wrapper
+        {
+            margin-bottom: 20px;
+        }
+        .check
+        {
+            display: flex;
+            flex-direction: row;
+        }
+        input[type="radio"]
+        {
+            margin: 5px 15px 0 0;
+        }
+        section
+        {
+            padding: 30px;
+            width: 100%;
+            height: 100%;
+            margin-left: 140px;  
+            background-color: #f5fcff;             
+        }
+        .cars
+        {
+            display: flex;
+            flex-direction: column;
+        }
+        .car
+        {
+            display: flex;
+            flex-direction: row;
+            height: 150px;
+            margin-left: 30px;
+        }
+        .car .photo
+        {
+            border: 1px solid black;
+            width: 250px;
+        }
+        .car .specification
+        {
+            border: 1px solid black;
+            width: 1000px;
+            padding: 25px;
+        }
+        .error
+        {
+            display: none;
+            text-align: center;
+            color: red;
+            font-size: 24pt;
+        }
+    </style>
+</head>
+<body>
+    <header>CarShop</header>
+
+    <div class="wrapper">
+        <aside>
+            <div class="radio-wrapper">
+                <div class="check">
+                    <input type="radio" name="som" id="more">
+                    <label for="more">Больше</label>
+                </div>
+                <div class="check">
+                    <input type="radio" name="som" id="equel">
+                    <label for="equel">Равно</label>
+                </div>
+                <div class="check">
+                    <input type="radio" name="som" id="less">
+                    <label for="less">Меньше</label>
+                </div>
+                
+            </div>
+
+            <label for="price">Цена</label>
+            <input type="text" name="" id="price">
+            
+            <label for="brand">Марка</label>
+            <input type="text" name="specs" id="brand">
+            <label for="model">Моддель машины</label>
+            <input type="text" name="specs" id="model">
+            <label for="color">Цвет машины</label>
+            <select name="specs" id="color"></select>
+
+            <button>Найти</button>
+        </aside>
+        
+        <section>
+            <div class="error">
+                <span>Ничего не найдено</span>
+            </div>
+            <div class="cars"></div>
+        </section>
+    </div>
+        
+    
+    
+    
+    <script src="jquery36.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
